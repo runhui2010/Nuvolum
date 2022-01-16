@@ -170,7 +170,7 @@ main {
   @include main-layout(
     60px!important,
     75px!important,
-    80px,
+    80px!important,
     rotate(90deg) !important,
     none!important
   );
