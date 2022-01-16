@@ -8,6 +8,8 @@ const Main = () => {
   const [products, setProducts] = useState([]);
   const [currProduct, setCurrProduct] = useState({});
 
+  //fetch products data once the page load.
+  //Re-render the Description component when use click on different product.
   useEffect(() => {
     axios.get(URL).then((res) => {
       setProducts(res.data);
@@ -37,7 +39,6 @@ const Main = () => {
                   {product.title}
                 </div>
                 <div
-
                 >
                   {currProduct.id===product.id ? (
                     <IoChevronForwardCircle size={60} color="#119DA4"/>
