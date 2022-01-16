@@ -1,0 +1,197 @@
+$font-xl: 48px;
+$font-lg: 36px;
+$font-md: 24px;
+$font-sm: 20px;
+$primary-color: #e5e6eb;
+$primary-hover-color: #d2d4dc;
+$secondary-color: #119da4;
+$font-weight-md: 300;
+$font-weight-lg: 500;
+$font-weight-xl: 600;
+$breakpoint-tablet: 480px;
+$breakpoint-desktop: 768px;
+$box-shadow: -5px -5px 5px $primary-hover-color,
+  5px 5px 5px $primary-hover-color;
+$img_border: 2px solid black;
+
+@mixin main-layout($img_width, $img_height, $row_height, $svg, $img_b) {
+  .product_left {
+    .product_left_row {
+      height: $row_height;
+    }
+    img {
+      width: $img_width;
+      height: $img_height;
+      box-shadow: $box-shadow;
+    }
+    img:hover {
+      border: $img_b;
+    }
+
+    svg {
+      transform: $svg;
+    }
+  }
+}
+@mixin header($font_s, $font_m, $font-weight) {
+  h1 {
+    font-size: $font_m;
+    font-weight: $font-weight;
+  }
+  p {
+    font-size: $font-s;
+  }
+}
+html {
+  background-color: $primary-color;
+  font-family: "Roboto", sans-serif;
+  font-weight: $font-weight-md;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+}
+header {
+  @include header($font-md, $font-xl, $font-weight-lg);
+  text-align: center;
+  width: 60%;
+  margin: auto;
+
+  h1 {
+    font-family: "Raleway", sans-serif;
+  }
+  p {
+    text-align: left;
+  }
+}
+main {
+  @include main-layout(120px, 150px, 150px, rotate(0deg), none);
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  .product_left {
+    grid-column: 1/4;
+    .product_left_row:hover {
+      background-color: $primary-hover-color;
+    }
+    .product_left_row {
+      width: 100%;
+      margin: 10px auto;
+      display: grid;
+      grid-template-columns: 2fr 3fr 1fr;
+      div {
+        font-weight: $font-weight-lg;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  .product_right {
+    grid-column: 4/7;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    > div {
+      box-shadow: $box-shadow;
+      height: 85vh;
+      padding: 20px;
+      background-color: white;
+      width: 80%;
+      margin: 30px auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: $font-md;
+      .price {
+        font-size: $font-md;
+        font-weight: $font-weight-lg;
+      }
+      .description {
+        font-size: $font-sm;
+      }
+      .add_btn {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        button {
+          background-color: $secondary-color;
+          width: 250px;
+          padding: 20px;
+          color: white;
+          border: none;
+          border-radius: 10px;
+          font-size: $font-sm;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-desktop) {
+  @include header($font-sm!important, $font-xl!important, $font-weight-md);
+  @include main-layout(
+    120px!important,
+    150px!important,
+    150px!important,
+    rotate(0deg),
+    $img_border!important
+  );
+  header {
+    width: 80%;
+  }
+  .product_left {
+    grid-column: 1/2 !important;
+    .product_left_row {
+      display: flex !important;
+      justify-content: flex-end;
+      align-items: center;
+      width: fit-content;
+    }
+    .title {
+      display: none !important;
+    }
+    svg {
+      display: none;
+    }
+  }
+  .product_right {
+    grid-column: 2/7 !important;
+  }
+}
+@media (max-width: $breakpoint-tablet) {
+  @include header(
+    $font-sm!important,
+    $font-md!important,
+    $font-weight-md!important
+  );
+  @include main-layout(
+    60px!important,
+    75px!important,
+    80px,
+    rotate(90deg) !important,
+    none!important
+  );
+  header {
+    width: 100%;
+  }
+  .product_left {
+    grid-column: 1/7 !important;
+    .product_left_row {
+      display: grid !important;
+    }
+    .title {
+      display: inline-block !important;
+    }
+    svg {
+      display: inline-block;
+      widows: 30px;
+      height: 30px;
+    }
+  }
+  .product_right {
+    grid-column: 1/7 !important;
+  }
+}
